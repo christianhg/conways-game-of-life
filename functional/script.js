@@ -88,7 +88,9 @@ function universeToString (universe) {
   return universe
     .map((row) => rowToString(row))
     .reduce((previousRow, currentRow) => {
-      return `${previousRow}${currentRow}\n`
+      return previousRow === ''
+        ? currentRow
+        : `${previousRow}\n${currentRow}`
     }, '')
 }
 
