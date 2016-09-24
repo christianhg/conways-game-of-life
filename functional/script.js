@@ -2,7 +2,7 @@ const width = 100
 const height = 60
 const stateAlive = '●'
 const stateDead = '○'
-const speed = 200
+const speed = 150
 const neighbourOffsets = [
   {x: -1, y: -1},
   {x: 0, y: -1},
