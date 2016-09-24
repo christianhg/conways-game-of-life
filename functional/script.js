@@ -47,7 +47,7 @@ function advanceUniverse (universe) {
 }
 
 function getNextCellState (universe, x, y) {
-  const alive = universe[y][x] === stateAlive
+  const alive = universe[y][x]
   const neighboursAlive = getNeighboursAlive(universe, x, y)
 
   // Will die because of under-population
@@ -64,7 +64,7 @@ function getNextCellState (universe, x, y) {
 
   const lives = (state2 || state4) && (!state1 || !state3)
 
-  return lives ? stateAlive : stateDead
+  return lives ? 1 : 0
 }
 
 function getNeighboursAlive (universe, x, y) {
@@ -80,7 +80,7 @@ function getNeighboursAlive (universe, x, y) {
 
       return universe[offsetY][offsetX]
     })
-    .filter((cellState) => cellState === stateAlive)
+    .filter((cellState) => cellState)
     .length
 }
 
@@ -95,10 +95,14 @@ function universeToString (universe) {
 function rowToString (row) {
   return row
     .reduce((previousCell, currentCell) => {
-      return `${previousCell}${currentCell}`
+      return `${previousCell}${cellToString(currentCell)}`
     }, '')
 }
 
+function cellToString (cell) {
+  return cell === 1 ? stateAlive : stateDead
+}
+
 function randomState () {
-  return Math.floor(Math.random() * (1 - 0 + 1)) ? stateAlive : stateDead
+  return Math.floor(Math.random() * (1 - 0 + 1))
 }
